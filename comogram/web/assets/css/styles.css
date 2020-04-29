@@ -1,0 +1,86 @@
+/*
+*	
+*	CUSTOM CSS
+*	IF ANYTHING NEEDED TO BE EDITED
+*	CODE PUT HERE
+*	RESPONSIVE IS AT THE END OF FILE
+*
+*/
+
+body { background: #f5f5f5; }
+img { height: auto; }
+.hero { padding:45px 0; }
+.negative-left-margin { margin-left:-1.75rem; }
+
+.navbar-row { display: block; width:100%; }
+.navbar-nav .nav-link { padding:.2rem .9rem; }
+.navbar-brand { position: relative; top: 2px; float: right; padding:0; margin-right:0; }
+aside p, aside h5 { color: #e9ecef; }
+aside p { margin-bottom: .3rem; }
+aside .card { width: 100%; }
+#mob-side-toggler { display: none; }
+label { margin-bottom: .1rem; cursor: pointer; }
+
+.breadcrumb { padding-left:0; margin-bottom:0; background:0; }
+
+.is_stuck { padding-top: 15px; }
+
+main hr { margin:1.5rem -1.5rem 1.3rem; }
+main h2 { padding-top: 1rem; }
+.main-card { border:.0625rem solid rgba(0,0,0,0.1); }
+
+.bootstrap-select .btn { padding-top:.43rem; padding-bottom: .43rem; border-radius: .25rem; }
+.input-group-sm .input-group-append .bootstrap-select .btn { padding-top:.43rem; padding-bottom: .43rem; border-radius: 0 .25rem .25rem 0; }
+.card-summary { margin-bottom: 1rem; border: 0; }
+.card-summary .card-body p { margin-bottom: .3rem; }
+.card-summary .card-body { padding-bottom: 1rem; }
+
+.popover-link { display: inline-block; padding:0 .5rem; }
+
+.medtxt { display: inline; }
+
+.meetscrit { color: #FFCD00; }
+
+.custom-control { margin-bottom: .5rem; }
+.collapse-content { border-bottom: 1px solid rgba(0,0,0,0.1); margin-top:1rem; }
+
+.radio-header { position: relative; left:-9px; }
+.radio-row { margin-bottom: .5rem; }
+
+.go-next-box { margin: 0 0 1rem; }
+
+footer { padding:2.5rem 1.5rem 3rem; border-top: .0625rem solid rgba(0,0,0,0.1); margin-top: 3rem; background: #fff; }
+
+.chart { height: 700px; }
+
+/*
+* RESPONSIVE STYLESHEET
+*/
+@media (max-width: 992px) {
+	aside.side { position: fixed; bottom: 0; left: 0; z-index: 999; display: block; width: 100%; transition: all 0.3s; -moz-transition: all 0.3s; /* Firefox 4 */ -webkit-transition: all 0.3s; /* Safari and Chrome */ -o-transition: all 0.3s; /* Opera */ }
+	aside.side .card { border:0; border-radius:0; }
+	#mob-side-toggler { display: block; border-radius: 0; }
+	.side #mob-side-toggler .opened, .side.side-opened #mob-side-toggler .closed { display:none; } 
+	.side #mob-side-toggler .closed, .side.side-opened #mob-side-toggler .opened { display:inline; }
+	aside .card-body p { width: 50%; float: left; }
+	aside hr { clear: both; }
+
+	footer { padding-bottom:80px; }
+}
+
+@media (min-width: 992px) {
+	#navbar, .navbar-toggler { float: left; }
+	.navbar-toggler { display: block; }
+	.navbar-nav .nav-link { padding:.2rem 1rem; }
+}
+
+@media (min-width: 576px) {
+	.navbar-toggler { position: relative; left: 1rem; }
+}
+
+@media (max-width: 576px) {
+	.container main { padding-left:0; padding-right: 0; }
+	.main-card { border-left: 0; border-right: 0; border-radius: 0; }
+	.radio-row .col-1 { padding: 0; }
+	.radio-header { left: 5px; }
+}

@@ -1,0 +1,742 @@
+<!------------------------------------
+	DOCS:
+	HTML template is based on:
+	1. Bootstrap v.4, https://getbootstrap.com/docs/4.3/getting-started/introduction/
+	2. Boomerang UI Kit (depends on Bootstrap 4), https://webpixels.github.io/boomerang-ui-kit/
+	3. Custom styles and scripts are located at assets/css/styles.css, assests/js/custom.js respectively,
+		 if you need to do changes, feel free to edit these files
+	4. Calculator script is located at assets/js/RISKv2.js
+-------------------------------------->
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Head and Neck Eligibility Calculator</title>
+
+		<link href="assets/images/favicon.ico" rel="icon"/>
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto:400,500,700" rel="stylesheet">
+
+    <!-- CSS IF ANY EDITS NEEDED USE assets/css/styles.css FILE -->
+    <link rel="stylesheet" href="assets/vendor/animate/animate.min.css" type="text/css">
+
+		<link type="text/css" href="assets/css/demo.css" rel="stylesheet">
+		<link type="text/css" href="assets/css/theme.css" rel="stylesheet">
+		<link type="text/css" href="assets/css/styles.css" rel="stylesheet">
+
+		<!-- Bootstrap JS -->
+		<script src="assets/vendor/jquery/jquery.min.js"></script>
+		<script src="assets/vendor/popper/popper.min.js"></script>
+		<script src="assets/js/bootstrap/bootstrap.min.js"></script>
+
+		<!-- FontAwesome 5 -->
+		<script src="assets/vendor/fontawesome/js/fontawesome-all.min.js" defer></script>
+
+		<!-- Scripts Vendors -->
+		<script src="assets/vendor/sticky-kit/sticky-kit.min.js"></script>
+		<script src="assets/vendor/clipboard-js/clipboard.min.js"></script>
+		<script src="assets/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+		<script src="assets/js/vendor/js-pdf.js"></script>
+		<script src="assets/js/vendor/clipboard.min.js"></script>
+
+
+		<!-- Theme JS -->
+		<!-- <script src="assets/js/RISKv4.js"></script> -->
+		<script src="assets/js/demo.js"></script>
+		<script src="assets/js/theme.js"></script>
+		<script src="assets/js/custom.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-tertiary">
+		<div class="container">
+			<div class="row navbar-row">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href='../../index.html'><i class="fas fa-home"></i> Home</a>  
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-toggle="modal" data-target="#modal_eligibility_criteria">Eligibility criteria</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-toggle="modal" data-target="#modal_reference">References</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="#" data-toggle="modal" data-target="#modal_copy_input_output">Copy Input/Output</a>
+						</li>
+					</ul>
+				</div><!-- / #navbar -->
+			</div><!-- / .row -->
+		</div><!-- /.container -->
+	</nav>
+
+	<section class="hero bg-primary">
+		<div class="container">
+			<h1 class="text-light">Head and Neck Eligibility Calculator</h1>
+
+			<p class="lead text-light">A tool to calculate comorbidity scores for RTOG, MARCH, VA, and Composite</p>
+		</div><!-- / .container -->
+	</section>
+
+	<div class='px-5'>
+		<div class="row">
+			<!-- <nav aria-label="breadcrumb" class="col-xl-12">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="assets/files/blank_form.pdf" target="_blank" class="btn btn-primary btn-animated btn-animated-x">
+							<span class="btn-inner--visible">Download Offline PDF</span>
+							<span class="btn-inner--hidden"><i class="fas fa-download"></i></span>
+						</a> or fill in data:
+					</li>
+				</ol>
+			</nav> -->
+
+			<main class="col-lg-4">
+				<div class="card main-card">
+					<div class="card-body">
+						<!--------------------------------------------------------
+							0. General Information and Cisplatin Contraindications
+							-------------------------------------------------------->
+						<h2 id="general-information-and-cisplatin-contraindications">General Information</h2>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="age">Age</label>
+
+									<input type="number" id="age" class="form-control form-control-sm mdc-textfield__input hw_entry" placeholder="Type Age">
+								</div>
+							</div>
+							<!-- // To add inputs
+							// marital status = married, socio economic status = lowses
+							// race = black, other, or unkown
+							// comorbitity, bmi (continuous now) -->
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="sex">Gender</label>
+
+									<select id="sex" class="selectpicker mdc-select hw_select">
+										<option></option>
+										<option value="0">Male</option>
+										<option value="1">Female</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="married">Marital Status</label>
+
+									<select id="married" class="selectpicker mdc-select hw_select">
+										<option></option>
+										<option value="0">Married</option>
+										<option value="1">Not Married</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="race">Race</label>
+
+									<select id="race" class="selectpicker mdc-select hw_select">
+										<option></option>
+										<option value="0">Black/African-American</option>
+										<option value="1">Other</option>
+										<option value="9">Unknown/Race-blind risk score</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="bmi">BMI</label>
+
+									<input type="number" id="bmi" class="form-control form-control-sm mdc-textfield__input hw_entry" placeholder="Type BMI">
+
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="lowses">Socioeconomic Status</label>
+									<select id="lowses" class="selectpicker mdc-select hw_select">
+										<option></option>
+										<option value="1">High school education or less</option>
+										<option value="0">Greater than high school education</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-3 mt-2 mb-2">
+								<div class="form-group custom-control custom-checkbox">
+									<input type="checkbox" id="cci" class="custom-control-input">
+									<label for="cci" class="custom-control-label">
+										CCI >= 2
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-3 mt-2 mb-2">
+								<div class="form-group custom-control custom-checkbox">
+									<input type="checkbox" id="ace-27" class="custom-control-input">
+									<label for="ace-27" class="custom-control-label">
+										ACE-27 >= 2
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-3 mt-2 mb-2">
+								<div class="form-group custom-control custom-checkbox">
+									<input type="checkbox" id="anemia" class="custom-control-input">
+									<label for="anemia" class="custom-control-label">
+										Anemia
+									</label>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="ecog">ECOG</label>
+									<select id="ecog" class="selectpicker mdc-select hw_select">
+										<option></option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="smk">Smoking Status</label>
+
+									<select id="smk" class="selectpicker">
+										<option></option>
+										<option value="1">Current Smoker</option>
+										<option value="0">Not a Current Smoker</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="tob">Tobacco History</label>
+
+									<select id="tob" class="selectpicker">
+										<option></option>
+										<option value="1">>=10 Pack Years</option>
+										<option value="0">< 10 Pack Years</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="ps">Primary Site</label>
+
+									<select id="ps" class="selectpicker">
+										<option></option>
+										<option value="1">Oral Cavity</option>
+										<option value="2">Oropharynx</option>
+										<option value="3">Larynx</option>
+										<option value="4">Hypopharynx</option>
+
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="ts">AJCC 7 Tumor Stage</label>
+
+									<select id="ts" class="selectpicker">
+										<option></option>
+										<option value="1">0-1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="ns">AJCC 7 Nodal Stage</label>
+
+									<select id="ns" class="selectpicker">
+										<option></option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-12">
+								<div class="form-group">
+									<label for="p16">p16 Status</label>
+
+									<select id="p16" class="selectpicker">
+										<option></option>
+										<option value="1">Positive</option>
+										<option value="0">Negative/Unknown</option>
+									</select>
+								</div>
+							</div>
+						</div><!-- / .row -->
+					</div><!-- / .card-body -->
+				</div><!-- / .main-card -->
+			</main>
+
+			<div class="col-lg-8 chart">
+				<canvas id="myChart" "></canvas>
+				<script src="assets/vendor/chart.js/dist/Chart.js"></script>
+				<script>
+					$(document).ready(function() {
+						omega();
+						$("input").change(function(){
+							omega();
+						});
+						$("*").click(function(){
+							omega();
+						});
+
+						function omega() {
+							var age = document.getElementById('age').value
+							var sex = document.getElementById('sex').value
+							var married = document.getElementById('married').value
+							var race = document.getElementById('race').value
+							var cci = document.getElementById('cci').checked
+							var ace27 = document.getElementById('ace-27').checked
+							var anemia = document.getElementById('anemia').checked
+							var bmi  = document.getElementById('bmi').value
+							var lowses = document.getElementById('lowses').value
+							var ecog  = document.getElementById('ecog').value
+							var smk  = document.getElementById('smk').value
+							var tob  = document.getElementById('tob').value
+							var ts = document.getElementById('ts').value
+							var ns = document.getElementById('ns').value
+							var ps = document.getElementById('ps').value
+							var p16 = document.getElementById('p16').value
+
+
+							// RTOG specific variables
+							// ECOG >= 1
+							if (ecog >= 1) {
+								rtog_ecog = 1
+							}
+							else {
+								rtog_ecog = 0
+							}
+							// N0, 1 if N0, 0 otherwise
+							if (ns == 0) {
+								rtog_ns = 1
+							}
+							else {
+								rtog_ns = 0
+							}
+							// ps to OC
+							if (ps == 1) {
+								rtog_ps = 1
+							}
+							else {
+								rtog_ps = 0
+							}
+
+							
+							console.log(age, bmi, rtog_ecog, rtog_ps, rtog_ns, p16)
+							var rtog_risk_score = -.3135292*((age-57.2)/9.126)
+										+.18329*(((bmi > 20)-.88538)/.31883)
+										-.2025297*((rtog_ecog -.377076)/.4851)
+										+.148293*((rtog_ps -.03488)/.18364)
+										-.1332337*((rtog_ns-.14452)/.3519)
+										-.2390754*((p16 -.488372)/.5)
+							
+							var rtog_omega_plus = 2.6
+							var rtog_exp_score = Math.exp(rtog_risk_score)
+							var omega_scaled_rtog = rtog_exp_score/(rtog_exp_score + 1)
+							var omega_score_rtog = (rtog_omega_plus * rtog_exp_score)/(rtog_omega_plus * rtog_exp_score + 1)
+
+
+							console.log("Omega Score RTOG: ", omega_score_rtog)
+
+							if (omega_score_rtog >= 0.8) {
+								rtog_color = 'rgb(74, 224, 74,0.8)'
+							} 
+							else {
+								rtog_color = 'rgba(255, 0, 0, 0.8)'
+							}
+
+							// MARCH specific variables
+							// ECOG1, 1 if == 1, 0 otherwise; ECOG2, 1 if >= 2, 0 otherwise
+							var ecog1 = 0
+							var ecog2 = 0
+							if (ecog == 1) {
+								ecog1 = 1
+							}
+							else if (ecog >= 2) {
+								ecog2 = 1
+							}
+							// OC  = ps == 1, OPX  = ps == 2, LX = ps == 3
+							var oc = 0
+							var opx = 0
+							var lx = 0
+							var hpx = 0 
+							if (ps == 1) {
+								oc = 1
+							}
+							else if (ps == 2) {
+								opx = 1
+							}
+							else if (ps == 3) {
+								lx = 1
+							}
+							else if (ps == 4) {
+								hpx = 1
+							}
+							
+							// n1 = ns == 1, n2 = ns == 2, n3 = ns == 3
+							var n1 = 0
+							var n2 = 0
+							var n3 = 0
+							if (ns == 1) {
+								n1 = 1
+							}
+							else if (ns == 2) {
+								n2 = 1
+							}
+							else if (ns == 3) {
+								n3 = 1
+							}
+
+							// t2 = ts == 2, t3 = ts ==3, t4 == ts == 4
+							var t1 = 0
+							var t2 = 0
+							var t3 = 0
+							var t4 = 0
+							if (ts == 1) {
+								t1 = 1
+							}
+							else if (ts == 2) {
+								t2 = 1
+							}
+							else if (ts == 3) {
+								t3 = 1
+							}
+							else if (ts == 4) {
+								t4 = 1
+							}
+							// smk and tob >= 10 
+
+							var march_risk_score = -0.391*((age - 59.3)/10.07) 
+												+ 0.052 * ((sex - 0.174)/0.379) 
+												- 0.099 * ((ecog1 - 0.337)/0.473) 
+												- 0.078 * ((ecog2 - 0.0485)/0.215) 
+												+ 0.198 * ((oc - 0.128)/0.334)
+												- 0.001 * ((opx - 0.435)/0.496) 
+												- 0.087 * ((lx - 0.335)/0.472) 
+												+ 0.063 * ((n1 - 0.168)/0.374) 
+												+ 0.166 * ((n2 - 0.307)/0.461) 
+												+ 0.113 * ((n3 - 0.077)/0.266) 
+												+ 0.132 * ((t2 - 0.307)/0.461) 
+												+ 0.132 * ((t3 - 0.331)/0.471) 
+												+ 0.169 * ((t4 - 0.252)/0.434) 
+												- 0.086 * ((p16 - 0.0553)/0.229) 
+												- 0.028 * ((smk - 0.303)/0.460) 
+												- 0.039 * ((tob - 0.232)/0.422)
+
+							var march_omega_plus = 5.24
+							var march_exp_score = Math.exp(march_risk_score)
+							var omega_scaled_march = march_exp_score/(march_exp_score + 1)
+							var omega_score_march = (march_omega_plus * march_exp_score)/(march_omega_plus * march_exp_score + 1)
+
+							console.log("Omega Score MARCH:",omega_score_march)
+							if (omega_score_march >= 0.8) {
+								march_color = 'rgba(74, 224, 74, 0.8)'
+							} 
+							else {
+								march_color = 'rgba(255, 0, 0, 0.8)'
+							}
+							// To add inputs
+							// marital status = married, socio economic status = lowses
+							// race = black, other, or unkown
+							// comorbitity, bmi (continuous now)
+							var comorbidity = (cci | ace27 | anemia)
+							var va_risk_score = -0.05924*((age - 63.5425)/8.416) 
+												+ 0.0624 * ((married - 0.3702)/0.4829)
+												- 0.1038*((lowses - .899)/0.30119) 
+												+ (0.052*(( (race == 1) - 0.165)/0.371))*( (race != 9) ) 
+												+ 0.0215*(( (ecog >= 2) - 0.04989)/0.2177) 
+												- 0.165*((comorbidity - 0.339)/0.4734) 
+												- 0.114*(( (bmi < 18.5) - 0.2169)/0.4122) 
+												+ 0.0559*(( (bmi > 25) - 0.30757)/0.4615) 
+												- 0.106*((smk -0.5387)/0.4985) 
+												+ 0.0813*(( (t1 == 1 | t3 == 1 | t4 ==1 ) - 0.882)/0.3223) 
+												+ 0.0709*(( (n2 == 1 | n3 == 1) -0.675)/0.4684) 
+												- 0.0057*(( ((oc == 1) && (p16 == 0) ) - 0.0424)/0.2016) 
+												+ 0.1127*(( ((opx == 1) && (p16 == 0) ) -0.02753)/0.16366) 
+												- 0.061*(( ((hpx == 1 | lx == 1) && (p16 == 0) ) - 0.3538)/0.4782)
+
+							var va_omega_plus = 2.17
+							var va_exp_score = Math.exp(va_risk_score)
+							var omega_scaled_va = va_exp_score/(va_exp_score + 1)
+							var omega_score_va = (va_omega_plus * va_exp_score)/(va_omega_plus * va_exp_score + 1)
+
+							if (omega_score_va >= 0.8) {
+								va_color = 'rgba(74, 224, 74, 0.8)'
+							} 
+							else {
+								va_color = 'rgba(255, 0, 0, 0.8)'
+							}
+
+							console.log('Omega Score VA:', omega_score_va,comorbidity)
+
+
+							var composite_risk_score = - 0.294 * ((age  -  60.3)/9.39) 
+													   + 0.035 * ((sex - 0.117)/0.298) 
+													   + 0.072 * ((married - 0.431)/0.489)
+													   - 0.089 * ((lowses - .819)/0.367) 
+													   + 0.047 * ((((race == 1) -  0.156)/0.362)*(race != 9))
+													   - 0.072 * (((ecog == 1) -  0.297)/0.451)
+													   - 0.033 * (((ecog >= 2)- 0.042)/0.199)
+													   - 0.141 * ((comorbidity - 0.339)/0.473) 
+													   + 0.092 * (((bmi > 20) - 0.750)/0.423) 
+													   - 0.070 * ((smk -  0.408)/0.478)
+													   - 0.035 * (((tob >= 10) - 0.588)/0.376)
+													   - 0.097 * ((p16 -  0.297)/0.387)
+													   + 0.198 * ((oc -  0.083)/0.270) 
+													   + 0.122 * ((opx - 0.537)/0.491) 
+													   + 0.013 * ((lx - 0.281)/0.446)
+													   + 0.063 * ((n1 -  0.163)/0.370)
+													   + 0.166 * ((n2 -  0.481)/0.476)
+													   + 0.113 * ((n3 -  0.068)/0.250)
+													   + 0.118 * ((t2 -  0.305)/0.460) 
+													   + 0.132 * ((t3 - 0.343)/0.474) 
+													   + 0.169 * ((t4 -  0.259)/0.438)
+							
+							var composite_omega_plus = 4
+							var composite_exp_score = Math.exp(composite_risk_score)
+							var omega_scaled_composite = composite_exp_score/(composite_exp_score + 1)
+							var omega_score_composite = (composite_omega_plus * composite_exp_score)/(composite_omega_plus * composite_exp_score + 1)
+
+							if (omega_score_composite >= 0.8) {
+								composite_color = 'rgba(74, 224, 74, 0.8)'
+							} 
+							else {
+								composite_color = 'rgba(255, 0, 0, 0.8)'
+							}
+
+
+							var ctx = document.getElementById('myChart').getContext('2d');
+
+							
+							ctx.height = 700;
+							Chart.defaults.global.legend.display = false;
+							Chart.defaults.global.title.display = true;
+							Chart.defaults.global.title.text = 'Omega Scores for RTOG, MARCH, VA, and Composite'
+							Chart.defaults.global.title.lineHeight = 2.5
+							Chart.defaults.global.title.fontSize = 16
+							Chart.defaults.global.animation.duration = 0
+							Chart.defaults.global.events = []
+							var myChart = new Chart(ctx, {
+								type: 'bar',
+								data: {
+									labels: ['RTOG', 'MARCH', 'VA', 'Composite'],
+									datasets: [{
+										label: 'Omega Scores',
+										data: [omega_score_rtog, omega_score_march, omega_score_va, omega_score_composite],
+										backgroundColor: [
+											rtog_color,
+											march_color,
+											va_color,
+											omega_score_composite
+										],
+										borderColor: [
+											'rgba(0, 0, 0, 0)',
+											'rgba(0, 0, 0, 0)',
+											'rgba(0, 0, 0, 0)',
+											'rgba(0, 0, 0, 0)',
+										],
+										borderWidth: 1,
+									// }, {
+									// 	label: 'Omega Threshold',
+									// 	data : [0.8,0.8,0.8,0.8],
+									// 	type: 'line'
+									}]
+								},
+								options: {
+									maintainAspectRatio: false,
+									scales: {
+										yAxes: [{
+											ticks: {
+												suggestedMax:1.0,
+												beginAtZero: true
+											}
+										}]
+									}
+								}
+							});
+						};
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+
+	<footer class="text-center">
+			Head and Neck Eligibility Calculator &copy; 2019
+			<br>
+			back to <a href="http://comogram.org/">comogram.org</a>
+	</footer>
+
+	<!----------------------------------
+		 START MODAL WINDOWS DEFINITIONS
+		---------------------------------->
+	<!-- Eligibility criteria -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_eligibility_criteria" aria-hidden="true" id="modal_eligibility_criteria">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>NRG-HN004 Eligibility Criteria Per Section 3.2.3</h3>
+
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true" class="bg-warning">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+							<h4>Patients can qualify for NRG HN004 by meeting one of the three sets of criteria detailed below.</h4>
+							<ul>
+							  <li>Age&ge; 70 with moderate to severe comorbidity or vulnerability to cisplatin, defined as having&nbsp;<strong><u>any one</u></strong>&nbsp;of the following conditions within 30 days prior to registration:
+								<ul>
+								  <li>Charlson Comorbidity Index &ge; 1</li>
+								  <li>ACE-27 Index &ge; 1</li>
+								  <li>GCE  &omega;<sub>pfs </sub>&lt; 0.6 &nbsp;</li>
+								  <li>G-8 score &le; 14</li>
+								  <li>CARG Toxicity Score &ge; 30%</li>
+								  <li>CIRS-G Score &ge; 4</li>
+								</ul>
+							  </li>
+							</ul>
+							<p>&nbsp;</p>
+							<p>&mdash;OR&mdash;</p>
+							<p>&nbsp;</p>
+							<ul>
+							  <li>Age &lt; 70 with severe comorbidity or vulnerability to cisplatin, defined as having&nbsp;<strong><u>two or more</u></strong> of the following conditions within 30 days prior to registration
+								<ul>
+								  <li>Charlson Comorbidity Index &ge; 1</li>
+								  <li>ACE-27 Index &ge; 1</li>
+								  <li>GCE  &omega;<sub>pfs </sub>&lt; 0.6 &nbsp;</li>
+								  <li>G-8 score &le; 14</li>
+								  <li>CARG Toxicity Score &ge; 30%</li>
+								  <li>CIRS-G Score &ge; 4</li>
+								</ul>
+							  </li>
+							</ul>
+							<p>&nbsp;</p>
+							<p>&mdash;OR&mdash;</p>
+							<p>&nbsp;</p>
+							<ul>
+							  <li>Any age with an absolute or relative contraindication to cisplatin, defined as one or more of the following within 30 days prior to registration:
+								<ul>
+								  <li>Creatinine clearance (CC) &lt; 60 cc/min
+									<ul>
+									  <li>For this calculation, use the Cockroft-Gault formula:</li>
+									  <li>CC = 0.85*(If female) * ((140 &ndash; Age in years) / (Serum Creatinine)) * (Weight in kg/ 72)</li>
+									</ul>
+								  </li>
+								  <li>Zubrod performance status 2 prior to registration</li>
+								  <li>Pre-existing peripheral neuropathy grade &ge; 1 (Clinical or diagnostic observations or symptoms consistent with peripheral motor and or sensory neuropathy)</li>
+								  <li>History of hearing loss, defined as either:
+									<ul>
+									  <li>Existing need of a hearing aid&nbsp;<u>OR</u></li>
+									  <li>&ge;25 decibel shift over 2 contiguous frequencies on a pretreatment hearing test</li>
+									</ul>
+								  </li>
+								</ul>
+							  </li>
+							</ul>
+							<p>&nbsp;</p>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+	</div><!-- end Eligibility criteria -->
+
+	<!-- References -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_reference" aria-hidden="true" id="modal_reference">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3>References</h3>
+
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true" class="bg-warning">&times;</span>
+						</button>
+					</div>
+
+					<div class="modal-body">
+							<p><strong>Generalized Competing Event (GCE) Model</strong></p>
+							<p>Carmona R, Zakeri K, Green G, et al. Improved method to stratify elderly patients with cancer at risk for competing events. J Clin Oncol 2016;34:1270-7. <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=26884579" target="_blank">PUBMED</a></p>
+							<p><strong>Geriatric 8 (G8) Model</strong></p>
+							<p>Bellera CA, Rainfray M, Mathoulin-Pelissier S, et al. Screening older cancer patients: First evaluation of the g-8 geriatric screening tool. Ann Oncol 2012;23:2166-72. <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=22250183" target="_blank">PUBMED</a></p>
+							<p><strong>Charlson Comorbidity Index (CCI) Model</strong></p>
+							<p>Charlson ME, Pompei P, Ales KL, et al. A new method of classifying prognostic comorbidity in longitudinal studies: Development and validation. J Chronic Dis 1987;40:373-83. <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=3558716" target="_blank">PUBMED</a></p>
+							<p><strong>Cancer and Aging Research Group (CARG) model</strong></p>
+							<p>Hurria A, Togawa K, Mohile SG, et al. Predicting chemotherapy toxicity in older adults with cancer: A prospective multicenter study. J Clin Oncol 2011;29:3457-65. <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=21810685" target="_blank">PUBMED</a></p>
+							<p><strong>Adult Comorbidity Evaluation - 27 (ACE-27)</strong></p>
+							<p>Piccirillo JF, Tierney RM, Costas I, et al. Prognostic importance of comorbidity in a hospital-based cancer registry. Jama 2004;291:2441-7. <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=15161894" target="_blank">PUBMED</a></p>
+							<p><strong>Cumulative Illness Rating Scale for Geriatrics (CIRS-G)</strong></p>
+							<p>Miller MD, Paradis CF, Houck PR, et al. Rating chronic medical illness burden in geropsychiatric practice and research: Application of the cumulative illness rating scale. Psychiatry Res 1992;41:237-48. <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=1594710" target="_blank">PUBMED</a></p>
+
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+	</div><!-- end References -->
+
+	<!-- Copy Input/Output -->
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_copy_input_output" aria-hidden="true" id="modal_copy_input_output">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Input/Output to Copy</h3>
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true" class="bg-warning">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<div class="form-group">
+						<textarea class="form-control" rows="15" id="deets" > </textarea>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-4">
+							<button type="button" class="btn btn-info btn-block btn-lg copy-clipboard" data-clipboard-target="#deets">
+								Copy
+							</button>
+						</div>
+					</div>
+
+					<script>
+						var clip = new Clipboard('.copy-clipboard');
+					</script>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div><!-- end Copy Input/Output -->
+	<!-- END MODAL WINDOWS DEFINITIONS -->
+</body>
+</html>

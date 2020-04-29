@@ -13,46 +13,203 @@
     <!-- Custom fonts for this template -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"> 
 
     <!-- Custom styles for this template -->
     <link href="css/landing-page.min.css" rel="stylesheet">
 
+    <style>
+      .container {
+        position: relative;
+        width: 50%;
+      }
+
+      .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      
+      .filter {
+        opacity: 0.5;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      .middle {
+        transition: .5s ease;
+        opacity: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      .middle a {
+        background-color: Transparent;
+        border: none; cursor:pointer; 
+        overflow: hidden; 
+        outline:none;
+        background-color: Transparent; 
+        border: none; cursor:pointer; 
+        outline:none;
+      }
+
+      /* .top {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      .top a {
+        background-color: Transparent;
+        border: none; cursor:pointer; 
+        overflow: hidden; 
+        outline:none;
+        background-color: Transparent; 
+        border: none; cursor:pointer; 
+        outline:none;
+      } */
+      
+      .container:hover .image {
+        opacity: 0.2;
+      }
+      
+      .container:hover .middle {
+        opacity: 1;
+      }
+ m
+
+      /* .containter:hover .top {
+        opacity: 1;
+      } */
+      
+      .text {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 16px 32px;
+      }
+
+      .btn-secondary:hover,  .btn-secondary:focus, .btn-secondary:active { 
+        /* background-color: rgb(148, 148, 148); */
+        background: transparent !important;
+        outline: none;
+      }
+
+      img.rounded-corners {
+        border-radius: 30 px;
+      }
+      </style>
   </head>
 
   <body>
 
-
-
+      
     <!-- Masthead -->
     <header class="masthead text-white text-center">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto">
-            <h1 class="mb-5"> COMOGRAM</h1>
+            <h1 class="mb-5"><strong> COMOGRAM </strong></h1>
           </div>
         </div>
-<div class="row">
+        <div class="row">
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-<h4> An online tool to evaluate comorbidity in head and neck cancer patients<h4>
+            <h4> An online tool to evaluate comorbidity and competing risks in cancer patients<h4>
           </div>
         </div>
-
-
-</div>
-<br><br><br>
-
-<div class="row">
-<div class="col-6">
-  <a href="NRG.html"class="btn btn-block btn-lg btn-primary">HN004 Eligibility</a>
-</div>
-<div class="col-6">
-  <a href="gen.html" class="btn btn-block btn-lg btn-primary">General Use</a>
-</div>
-</div>
       </div>
-    </header>
+      <br><br><br>
+
+      <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3 col-12 my-5 container" style=" padding:0%; height:300px;">
+          <img src="img/NRG_oncology.jpg" alt="Avatar" class="image" style="width:300px; height:300px;">
+          <img src="img/black.jpg" class="filter"  style="width:300px; height:300px;">
+          <div class="middle">
+            <a href="comogram/web/NRG.html"class="btn btn-block btn-lg btn-secondary">NRG-HN004 <br> Trial Eligibility</a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-12 my-5 container" style=" padding:0%; height:300px;">
+          <img src="img/NRG_oncology.jpg" alt="Avatar" class="image" style="width:300px; height:300px;">
+          <img src="img/black.jpg" class="filter"  style="width:300px; height:300px;">
+          <div class="middle">
+            <a href="comogram/web/NRG-HN008.html"class="btn btn-block btn-lg btn-secondary">NRG-HN008 <br> Trial Eligibility</a>
+          </div>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+
+
+      
+      <div class="row">
+        <div class="col-xl-2 col-lg-0"></div>
+        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-12 my-5 container" style=" padding:0%; height:300px;">
+            <img src="img/hnc_img.png" alt="Avatar" class="image" style="width:300px; height:300px;"> 
+            <img src="img/black.jpg" class="filter"  style="width:300px; height:300px;">
+            <div class="middle">
+              <a href="comogram/web/HNC.html"class="btn btn-block btn-lg btn-secondary"><b>Head and Neck</b></a>
+            </div>
+            <!-- <div class="top">
+              <a href="HNC.html"class="btn btn-block btn-lg btn-primary">
+                <b>Head and Neck</b>
+                <br />
+                <u>Secondary info goes here</u>
+              </a>
+            </div> -->
+        </div>
+        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-12 my-5 container" style=" padding:0%; height:300px;">
+            <img src="img/prostate_img.png" alt="Avatar" class="image" style="width:300px; height:300px;">
+            <img src="img/black.jpg" class="filter"  style="width:300px; height:300px;">
+            <div class="middle mt-4">
+              <a href="#" class="btn btn-block btn-lg btn-secondary"><b>Prostate</b><br></br>Coming Soon...</a>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6 col-12 my-5 container" style=" padding:0%; height:300px;">
+            <img src="img/breast_img.png" alt="Avatar" class="image" style="width:300px; height:300px;">
+            <img src="img/black.jpg" class="filter"  style="width:300px; height:300px;">
+            <div class="middle mt-4">
+              <a href="#" class="btn btn-block btn-lg btn-secondary"><b>Breast</b><br></br>Coming Soon...</a>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-6  col-md-6 col-sm-6 col-12 my-5 container" style=" padding:0%; height:300px;">
+            <img src="img/general.png" alt="Avatar" class="image rounded-corners" style="width:300px; height:300px;">
+            <img src="img/black.jpg" class="filter rounded-corners"  style="width:300px; height:300px;">
+            <div class="middle">
+              <a href="comogram/web/gen.html" class="btn btn-block btn-lg btn-secondary"><b>General Comobidity</b></a>
+            </div>
+      </div>
+      <div class="col-xl-2 col-lg-0"></div>
+    </div>
+  </div>
+</header>
 
 
 
@@ -61,7 +218,7 @@
       <div class="container">
         <h2 class="mb-5">About</h2>
         <div class="row">
-        <h5> Comogram is an online tool that aggregates validated models for evaluating comorbidity in head and neck cancer patients.  </h5>
+        <h5> Comogram is a web-based resource that aggregates validated models for evaluating comorbidity and competing risks. Our mission is to integrate comorbidity evaluation into cancer care and improve clinical decision making.  </h5>
         </div>
       </div>
     </section>
@@ -79,13 +236,18 @@
               </li>
               <li class="list-inline-item">&sdot;</li>
               <li class="list-inline-item">
-                <a href="#">Terms of Use</a>
+                <a href="#Terms">Terms of Use</a>
               </li>
               <li class="list-inline-item">&sdot;</li>
 
             </ul>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; Comogram 2018. All Rights Reserved.</p>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; Comogram 2019. All Rights Reserved.</p>
+
           </div>
+          <div class col-xs-12>
+          <p class="text-muted small mb-4 mb-lg-0" id="Terms"> The content contained on the Website has been prepared by Comogram.org as a service to its members and the Internet community and is not intended to constitute medical advice or opinion. Comogram.org has used reasonable efforts in collecting, preparing and providing quality information and material, but does not warrant or guarantee the accuracy, completeness, adequacy or currency of the information contained on or linked to the Website. Users of the information from the Website or links do so at their own risk and explicitly agree that they have sufficient professional training and licensure to evaluate and utilize any of the information in their professional activity.
+          </p>
+        </div>
 
         </div>
       </div>
@@ -96,5 +258,6 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
+
 
 </html>

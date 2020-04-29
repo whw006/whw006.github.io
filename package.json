@@ -1,0 +1,23 @@
+{
+  "name": "comogram",
+  "version": "1.0.0",
+  "description": "comogram.org",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whw006/Comogram.git"
+  },
+  "author": "Hank Wong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/whw006/Comogram/issues"
+  },
+  "homepage": "https://github.com/whw006/Comogram#readme",
+  "dependencies": {
+    "chart.js": "^2.9.3",
+    "gulp": "^3.9.1"
+  }
+}

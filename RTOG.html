@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> GCE Head and Neck Cancer </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./javascripts/jquery.min.js"></script>
+
+  <!-- Boostrap v 3.3.7 -->
+  <link rel="stylesheet" href="./styles/bootstrap.min.css">
+  <script src="./javascripts/bootstrap.min.js"></script>
+  <script src="./javascripts/RISKgen.js"></script>
+  <script src="./javascripts/jspdf.js"> </script>
+  <!-- Material design component  -->
+  <link rel="stylesheet" href="./styles/material-components-web.min.css">
+
+
+  <style>
+
+
+  :root {
+    --mdc-theme-primary: #006A96;
+    --mdc-theme-secondary: #182B49;
+
+  }
+
+  .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::before,
+  .mdc-ripple-surface.mdc-ripple-upgraded.mdc-button--primary::after {
+    background-color: rgba(255, 255, 255, .2);
+  }
+
+  #greeting-form > button {
+    margin-top: 8px;
+  }
+  </style>
+
+  <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+  <script>mdc.autoInit();</script>
+  <link rel="stylesheet" type="text/css" href="styles/RISKstyle.css">
+</head>
+
+
+<body>
+
+  <div class="jumbotron text-center">
+    <h1> COMOGRAM</h1>
+    <h4>Head and Neck Cancer GCE Model (RTOG)</h4>
+<br>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/3.5.16/iframeResizer.min.js"></script>
+  <style>
+    iframe {
+      min-width: 100%;
+    }
+  </style>
+  <iframe id="myIframe" src="https://comogram.shinyapps.io/gceRTOG/" scrolling="no" frameborder="no"></iframe>
+  <script>
+    iFrameResize({
+      heightCalculationMethod: 'taggedElement'
+    });
+  </script>
+
+    </body>
+    </html>

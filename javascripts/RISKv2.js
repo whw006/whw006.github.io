@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+console.log("Risk V2.1")
   $("input").change(function(){
     omega();
   });
@@ -69,7 +69,7 @@ var deets_out =''
 
     // Calculates R
     var age = parseFloat(document.getElementById('age').value);
-    var R = -.3135292 * (0.1 * age - 5.72) / .9126
+    var R = -.391 * ( age - 59.3) / 10.07
     deets_in += '*** GCE Inputs ***' + '\n'
     deets_in += 'age:' + age + '\n'
 
@@ -92,7 +92,6 @@ var deets_out =''
         if (bmi < 20) {
         BMI_int = 0
     }
-    var R = R + .18329 * (BMI_int - 0.88538)  / 0.31883
     bmi = Math.round(bmi*100) / 100
 
 
@@ -101,13 +100,14 @@ var deets_out =''
     //goheres
 
     var sex = document.getElementById('sex_unit').value;
-if (sex = 0) {
+
+    if (sex == 1 ) {
+       deets_in += 'Gender: Female' + '\n'
+     }
+if (sex == 0) {
   deets_in += 'Gender: Male' + '\n'
   }
-  else {
-    deets_in += 'Gender: Female' + '\n'
-
-  }
+var R = R + 0.052 * ((sex - 0.174) / 379);
     // var sex = document.querySelector('input[name="sex"]:checked').value;
     // var sex = document.getElementById('sex').value;
 
@@ -115,45 +115,118 @@ if (sex = 0) {
 
   var ecog_int = 0
 
-    if (ecog > 0) {
-      var ecog_int = 1
-    }
-    if (ecog = 0) {
+    if (ecog == 0) {
+      var ecog_1 = 0
+      var ecog_2 = 0
       deets_in += 'ECOG: 0' + '\n'
+    }
+    if (ecog == 1 ) {
+      var ecog_1 = 1
+      var ecog_2 = 0
+      deets_in += 'ECOG: 1' + '\n'
+    }
+    if (ecog == 2) {
+      var ecog_1 = 0
+      var ecog_2 = 1
+        deets_in += 'ECOG: 2+' + '\n'
       }
-      else {
-        deets_in += 'ECOG: >=1' + '\n'
 
-      }
 
-    var R = R - 0.2025297 * ((ecog_int - 0.377076) / 0.4851);
+    var R = R - 0.099 * ((ecog_1 - 0.337) / 0.473) - 0.078*((ecog_2 - 0.0485)/0.215)  ;
 
     // R based on tumor primary location
     var loc = document.getElementById('site').value;
 
     if (loc == 0) {
-      deets_in += 'Primary site: Not Oral Cavity' + '\n'
+      deets_in += 'Primary site: Hypopharynx or UKP' + '\n'
+      var lnx = 0
+      var oc = 0
+      var ophnx = 0
       }
-      else if (loc == 1){
-        deets_in += 'Primary site: Oral Cavity' + '\n'
 
-      }
+    if (loc == 1) {
+        deets_in += 'Primary site: Larynx' + '\n'
+        var lnx = 1
+        var oc = 0
+        var ophnx = 0
+        }
+    if (loc == 2) {
+          deets_in += 'Primary site: Oral Cavity' + '\n'
+          var lnx = 0
+          var oc = 1
+          var ophnx = 0
+          }
+    if (loc == 3) {
+              deets_in += 'Primary site: Oropharynx' + '\n'
+              var lnx = 0
+              var oc = 0
+              var ophnx = 1
+              }
 
-    var R = R + 0.148293 * ((loc - 0.03488) / .18364)
+
+
+    var R = R + 0.198*((oc-0.128)/0.334) - 0.001*((ophnx - 0.435)/0.496) - 0.087 * ((lnx-0.335)/0.472)
 
     // R based on N stage
     var nstage = document.getElementById('nstage').value;
+    if (nstage == 0) {
+      deets_in += 'AJCC 8th N stage: N0' + '\n'
+      var n1 = 0
+      var n2 = 0
+      var n3 = 0
+      }
     if (nstage == 1) {
-      deets_in += 'AJCC 7th N stage: N0' + '\n'
+      deets_in += 'AJCC 8th N stage: N1' + '\n'
+      var n1 = 1
+      var n2 = 0
+      var n3 = 0
       }
-      else {
-        deets_in += 'AJCC 7th N stage: N1 or greater' + '\n'
-
+    if (nstage == 2) {
+      deets_in += 'AJCC 8th N stage: N2' + '\n'
+      var n1 = 0
+      var n2 = 1
+      var n3 = 0
+      }
+    if (nstage == 3) {
+      deets_in += 'AJCC 8th N stage: N3' + '\n'
+      var n1 = 0
+      var n2 = 0
+      var n3 = 1
       }
 
-    var R = R - 0.1332337 * ((nstage - 0.14452) / 0.3519);
+    var R = R + 0.063*((n1-0.168)/.374) + 0.166*((n2-0.307)/0.461) + 0.113*((n3-0.077)/0.266);
 
-    // Smoking and p16
+    // T based on N stage
+    var tstage = document.getElementById('tstage').value;
+    if (tstage == 0) {
+      deets_in += 'AJCC 8th T stage: 0-1' + '\n'
+      var t2 = 0
+      var t3 = 0
+      var t4 = 0
+      }
+    if (tstage == 1) {
+      deets_in += 'AJCC 8th T stage: 2' + '\n'
+      var t2 = 1
+      var t3 = 0
+      var t4 = 0
+      }
+    if (tstage == 2) {
+      deets_in += 'AJCC 8th T stage: 3' + '\n'
+      var t2 = 0
+      var t3 = 1
+      var t4 = 0
+      }
+    if (tstage == 3) {
+      deets_in += 'AJCC 8th T stage: 4' + '\n'
+      var t2 = 0
+      var t3 = 0
+      var t4 = 1
+      }
+
+    var R = R + 0.132*((t2-0.307)/0.461) + 0.132*((t3 - 0.331)/0.471) + 0.169 * ((t4 - 0.252)/0.434);
+
+
+    // p16
     var p16 = document.getElementById('p16').value;
     if (p16 == 1) {
       deets_in += 'p16: Positive' + '\n'
@@ -161,12 +234,35 @@ if (sex = 0) {
       else {
         deets_in += 'p16: Negative' + '\n'
       }
+    R = R - 0.086 * ((p16 - 0.0553) / 0.229);
 
-    R = R - 0.2390754 * ((p16 - 0.488372) / 0.5);
+
+    // Smoking
+    var smoke = document.getElementById('smk').value;
+    if (smoke == 1) {
+      deets_in += 'Current Smoker' + '\n'
+      }
+      else {
+        deets_in += 'Not a Current Smoker' + '\n'
+      }
+    R = R - 0.028 * ((smoke - 0.303) / 0.460);
+
+    var tob = document.getElementById('tob').value;
+    if (tob == 1) {
+      deets_in += '>= 10 pack year history' + '\n'
+      }
+      else {
+        deets_in += '< 10 pack year history' + '\n'
+      }
+    R = R - 0.039 * ((tob - 0.232) / 0.422);
+
+
     //  // Calculates omega from Risk score
+
+
     var w = Math.exp(R);
 
-    var wp = w / (w + 1);
+    var wp = w*5.24 / (w*5.24 + 1);
 
     // rounds omega to nearest to 2 decimels
     var wp = Math.round(wp * 100) / 100;
@@ -427,7 +523,7 @@ deets_in += 'CARG Criteria Met: '
   $("*").removeClass("meetscrit")
     if (age >= 70){
       var ELIG = 0;
-      if (wp < 0.6) {ELIG += 1;
+      if (R < -0.25) {ELIG += 1;
         $("#omega_out, #omega_label").addClass("meetscrit");
       }
       if (ace >= 1) {ELIG += 1;
@@ -483,7 +579,7 @@ deets_in += 'CARG Criteria Met: '
 
     else {
       var ELIG = 0
-      if (wp < 0.6) {ELIG += 1;
+      if (R < -0.25) {ELIG += 1;
         $("#omega_out, #omega_label").addClass("meetscrit");
       }
       if (ace >=1) {ELIG += 1;
@@ -541,7 +637,7 @@ else if (CGF < 60) {
       }
     }
   });
-  document.getElementById("PDF").onclick = function(){
+    $("#PDF").unbind().click(function(){
     var doc = new jsPDF();
     doc.setFontType("bold");
     doc.text(20, 20, 'Model Input:');
@@ -557,7 +653,7 @@ else if (CGF < 60) {
     doc.text(20,30,deets_out);
     //save the pdf
     doc.save('HN004 comogram.pdf');
-}
+})
 
     // outputs
     deets_out += 'GCE Omega:' + wp + '\n'
